@@ -34,6 +34,7 @@ BROKER_PIN = os.getenv("BROKER_PIN", "")  # MPIN
 BROKER_TOTP_KEY = os.getenv("BROKER_TOTP_KEY", "")  # Secret key for TOTP 2FA
 BROKER_API_KEY = os.getenv("BROKER_API_KEY", "")
 BROKER_REDIRECT_URL = os.getenv("BROKER_REDIRECT_URL", "http://127.0.0.1:5000")
+STATIC_IP = os.getenv("STATIC_IP", None)  # Whitelisted static public IPv4 address
 
 # ==============================================================================
 # 3. Micro-Capital & Risk Sentinel Parameters
