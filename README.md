@@ -128,7 +128,10 @@ $$
 
 Any completed transaction that fails to generate a minimum gross return exceeding **Rs. 65** is registered as a structural net loss.
 
-### D. Daily Circuit Breaker Sentinels
+### D. Dynamic Entry Gates & Exit Constraints
+* **Order Book Imbalance (OBI) Entry Gate:** Buy orders are blocked unless the Order Book Imbalance exceeds 0.3 ($OBI_t > 0.3$), ensuring strong buy-side depth and minimizing entry slippage.
+* **Wavelet-Pegged Stop-Loss:** Enforces a dynamic stop-loss pegged strictly **1.0% below the 3-level db4 wavelet close trend line** (modeling an average loss of -1.2% gross).
+* **Circuit-Peaking & Trailing Profit Exit:** Exits are triggered dynamically either **0.5% below the upper circuit ceiling** or via a **trailing stop-loss** activated when trade net profit exceeds +3.0% (modeling an average gain of +6.0% gross).
 * **Circuit Margin Window:** Aborts order routing instantly if the current asset ask price is within 1.5% of the upper circuit ceiling.
 * **Blacklisting:** Permanently blacklists assets placed on the NSE's Additional Surveillance Measure (ASM) or Graded Surveillance Measure (GSM) lists at Stage 2 or higher.
 
