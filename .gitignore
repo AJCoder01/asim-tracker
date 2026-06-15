@@ -23,6 +23,7 @@ __pycache__/
 # Environment & Private Variables
 .env
 .env.*
+!.env.template
 
 # OS files
 .DS_Store
