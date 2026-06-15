@@ -1,10 +1,10 @@
 # ASIM-Tracker: Anomalous Sentiment Inflation & Exhaustion Tracker
 
-ASIM-Tracker is a production-grade, real-time quantitative trading framework engineered to operate within the Cash Equity segment of the National Stock Exchange of India (NSE). It is mathematically tuned to maximize risk-adjusted returns on a retail micro-budget ($\le \text{Rs. 5,000}$) by tracking, riding, and exiting operator-driven sentiment spikes and news-induced retail FOMO.
+ASIM-Tracker is a production-grade, real-time quantitative trading framework engineered to operate within the Cash Equity segment of the National Stock Exchange of India (NSE). It is mathematically tuned to maximize risk-adjusted returns on a retail micro-budget ($\le$ **Rs. 5,000**) by tracking, riding, and exiting operator-driven sentiment spikes and news-induced retail FOMO.
 
 Instead of deploying traditional Markowitz mean-variance portfolio allocation, which is fee-dilutive under flat Indian brokerage tariffs, ASIM-Tracker enforces a strict 1-sparsity cardinality constraint:
 $$\|\mathbf{w}_t\|_0 \le 1$$
-This constraint pools 100% of available liquidity into at most one high-conviction, low-priced asset ($P_{i,t} \le \text{Rs. 200}$) per trading window.
+This constraint pools 100% of available liquidity into at most one high-conviction, low-priced asset ($P_{i,t} \le$ **Rs. 200**) per trading window.
 
 ---
 
@@ -103,7 +103,7 @@ $$\Phi_{\text{Friction}} = 40 + (0.00025 \cdot V_{\text{sell}}) + (0.00003 \cdot
 Any completed transaction that fails to generate a minimum gross return exceeding **Rs. 65** is registered as a structural net loss.
 
 ### D. Daily Circuit Breaker Sentinels
-* **Circuit Margin Window:** Aborts order routing instantly if the current asset ask price is within 1.5% of the upper circuit ceiling.
+* **Circuit Margin Window:** Aborts order routing instantly if the current asset ask price is within 1.5% of the upper daily circuit ceiling.
 * **Blacklisting:** Permanently blacklists assets placed on the NSE's Additional Surveillance Measure (ASM) or Graded Surveillance Measure (GSM) lists at Stage 2 or higher.
 
 ---
