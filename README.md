@@ -1,10 +1,10 @@
 # ASIM-Tracker: Anomalous Sentiment Inflation & Exhaustion Tracker
 
-ASIM-Tracker is a production-grade, real-time quantitative trading framework engineered to operate within the Cash Equity segment of the National Stock Exchange of India (NSE). It is mathematically tuned to maximize risk-adjusted returns on a retail micro-budget ($\le \text{₹5,000}$) by tracking, riding, and exiting operator-driven sentiment spikes and news-induced retail FOMO.
+ASIM-Tracker is a production-grade, real-time quantitative trading framework engineered to operate within the Cash Equity segment of the National Stock Exchange of India (NSE). It is mathematically tuned to maximize risk-adjusted returns on a retail micro-budget ($\le \text{Rs. 5,000}$) by tracking, riding, and exiting operator-driven sentiment spikes and news-induced retail FOMO.
 
 Instead of deploying traditional Markowitz mean-variance portfolio allocation, which is fee-dilutive under flat Indian brokerage tariffs, ASIM-Tracker enforces a strict 1-sparsity cardinality constraint:
 $$\|\mathbf{w}_t\|_0 \le 1$$
-This constraint pools 100% of available liquidity into at most one high-conviction, low-priced asset ($P_{i,t} \le \text{₹200}$) per trading window.
+This constraint pools 100% of available liquidity into at most one high-conviction, low-priced asset ($P_{i,t} \le \text{Rs. 200}$) per trading window.
 
 ---
 
@@ -90,15 +90,17 @@ Under the SEBI Algorithmic Trading Compliance Framework, automated order routing
 ### C. Post-Budget 2026 Friction Engine
 Calculates the exact asymmetric Indian statutory cash intraday fee matrix:
 $$\Phi_{\text{Friction}} = 40 + (0.00025 \cdot V_{\text{sell}}) + (0.00003 \cdot V_{\text{buy}}) + 1.18 \cdot (\text{Fees}_{\text{Exchange}} + \text{Fees}_{\text{SEBI}}) + \text{Slippage}(OBI)$$
-Where:
-* **Brokerage Fee Floor:** Flat ₹20 drag per buy and sell execution (₹40 round-trip).
-* **STT:** 0.025% applied exclusively to the transaction value on the Sell Side.
-* **Stamp Duty:** 0.003% applied exclusively to the transaction value on the Buy Side.
-* **Exchange Turnover Fee:** 0.00307% symmetric rate applied to total turnover value (Buy + Sell).
-* **SEBI Turnover Charge:** 0.0001% symmetric rate applied to total turnover value.
-* **GST:** 18.0% composite tax levied only over the sum of (Brokerage + Exchange Fees + SEBI Fees). STT and Stamp Duty are GST-exempt.
 
-Any completed transaction that fails to generate a minimum gross return exceeding **₹65** is registered as a structural net loss.
+| Cost Component | Rate Type | Operational Application Parameter |
+| :--- | :--- | :--- |
+| **Brokerage Fee Floor** | Flat Rs. 20 per executed order | Evaluated as a flat Rs. 20 drag per buy and sell execution (Rs. 40 round-trip) |
+| **Securities Transaction Tax (STT)** | 0.025% Asymmetric Rate | Applied exclusively to the transaction value on the Sell Side |
+| **Stamp Duty** | 0.003% Asymmetric Rate | Applied exclusively to the transaction value on the Buy Side |
+| **Exchange Turnover Fee (NSE)** | 0.00307% Symmetric Rate | Applied to total turnover value (Buy Value + Sell Value) |
+| **SEBI Turnover Charge** | 0.0001% Symmetric Rate | Applied to total turnover value (Rs. 10 per Crore) |
+| **Goods & Services Tax (GST)** | 18.0% Composite Tax | Levied only over the sum of (Brokerage + Exchange Fees + SEBI Fees) |
+
+Any completed transaction that fails to generate a minimum gross return exceeding **Rs. 65** is registered as a structural net loss.
 
 ### D. Daily Circuit Breaker Sentinels
 * **Circuit Margin Window:** Aborts order routing instantly if the current asset ask price is within 1.5% of the upper circuit ceiling.
@@ -108,39 +110,29 @@ Any completed transaction that fails to generate a minimum gross return exceedin
 
 ## 5. Directory Layout
 
-```
-.
-├── BACKTEST_METHODOLOGY.md     # Backtesting validation framework
-├── CONSTRAINTS.md              # Financial friction and regulatory rules
-├── DATA_ARCHITECTURE.md        # DB schemas and multimodal alignment logic
-├── PLAN.md                     # Roadmap and milestones
-├── README.md                   # Core system specifications (this file)
-├── config.py                   # Centralized system configurations
-├── main.py                     # Main execution entry point
-├── backtester/
-│   ├── __init__.py
-│   └── event_driven.py         # Event-driven NumPy simulator
-├── data_pipeline/
-│   ├── __init__.py
-│   ├── database/
-│   │   ├── __init__.py
-│   │   └── db_client.py        # SQLite schema and forward-join query
-│   ├── processors/
-│   │   ├── __init__.py
-│   │   ├── text_processor.py   # Quantized ONNX FinBERT model and tokenizer
-│   │   └── market_processor.py # DWT and OBI calculations
-│   └── scrapers/
-│       ├── __init__.py
-│       ├── news_scraper.py     # asyncio / aiohttp RSS scraper
-│       └── redis_queue.py      # Redis caching buffer
-├── execution_system/
-│   ├── __init__.py
-│   ├── broker_api.py           # Dhan/Angel API morning auth and session reset
-│   ├── order_routing.py        # 10 OPS pegged limit order router
-│   └── sentinel.py             # Circuit limit watchdog and ASM/GSM filters
-└── model_engine/
-    ├── __init__.py
-    ├── loss.py                 # Custom loss modules
-    ├── networks.py             # Bilinear cross-attention module in PyTorch
-    └── optimization.py         # Hawkes MLE optimizer
-```
+The workspace components are linked below:
+
+* **Core Configuration & Entry points:**
+  * [`config.py`](file:///Users/ayush/everything/Projects/asim-tracker/config.py): Centralized system configurations and parameter validations.
+  * [`main.py`](file:///Users/ayush/everything/Projects/asim-tracker/main.py): Main coordination event loop and execution entry point.
+* **Documentation Guides:**
+  * [`PLAN.md`](file:///Users/ayush/everything/Projects/asim-tracker/PLAN.md): Project roadmaps and granular atomic task lists.
+  * [`CONSTRAINTS.md`](file:///Users/ayush/everything/Projects/asim-tracker/CONSTRAINTS.md): Financial cost equations and regulatory compliance parameters.
+  * [`DATA_ARCHITECTURE.md`](file:///Users/ayush/everything/Projects/asim-tracker/DATA_ARCHITECTURE.md): Database stream schemas and multimodal forward-window joins.
+  * [`BACKTEST_METHODOLOGY.md`](file:///Users/ayush/everything/Projects/asim-tracker/BACKTEST_METHODOLOGY.md): Event-driven simulator parameters and backtest regimes.
+* **Data Ingestion & Processing (`data_pipeline/`):**
+  * [`data_pipeline/database/db_client.py`](file:///Users/ayush/everything/Projects/asim-tracker/data_pipeline/database/db_client.py): Local SQLite3 initialization and synchronization queries.
+  * [`data_pipeline/scrapers/news_scraper.py`](file:///Users/ayush/everything/Projects/asim-tracker/data_pipeline/scrapers/news_scraper.py): Asynchronous web scraper polling alternative news RSS feeds.
+  * [`data_pipeline/scrapers/redis_queue.py`](file:///Users/ayush/everything/Projects/asim-tracker/data_pipeline/scrapers/redis_queue.py): Redis connection pool manager buffering live streams.
+  * [`data_pipeline/processors/text_processor.py`](file:///Users/ayush/everything/Projects/asim-tracker/data_pipeline/processors/text_processor.py): Quantized ONNX FinBERT model handling sentiment score mapping.
+  * [`data_pipeline/processors/market_processor.py`](file:///Users/ayush/everything/Projects/asim-tracker/data_pipeline/processors/market_processor.py): Level-3 DWT filter configurations and OBI calculations.
+* **Quantitative Modeling (`model_engine/`):**
+  * [`model_engine/networks.py`](file:///Users/ayush/everything/Projects/asim-tracker/model_engine/networks.py): Bilinear cross-attention module in PyTorch.
+  * [`model_engine/optimization.py`](file:///Users/ayush/everything/Projects/asim-tracker/model_engine/optimization.py): Hawkes process MLE parameter estimator.
+  * [`model_engine/loss.py`](file:///Users/ayush/everything/Projects/asim-tracker/model_engine/loss.py): Custom target losses.
+* **Execution Sentinel (`execution_system/`):**
+  * [`execution_system/broker_api.py`](file:///Users/ayush/everything/Projects/asim-tracker/execution_system/broker_api.py): Handles TOTP 2FA daily sessions and resets.
+  * [`execution_system/order_routing.py`](file:///Users/ayush/everything/Projects/asim-tracker/execution_system/order_routing.py): Under 10 OPS pegged limit order transmitter.
+  * [`execution_system/sentinel.py`](file:///Users/ayush/everything/Projects/asim-tracker/execution_system/sentinel.py): Circuit breakers and stage 2+ ASM/GSM asset blacklist watchdogs.
+* **Backtester Loop (`backtester/`):**
+  * [`backtester/event_driven.py`](file:///Users/ayush/everything/Projects/asim-tracker/backtester/event_driven.py): NumPy chronological event-driven simulator.
