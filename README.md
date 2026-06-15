@@ -141,11 +141,6 @@ The workspace components are linked below:
 * **Core Configuration & Entry points:**
   * [`config.py`](config.py): Centralized system configurations and parameter validations.
   * [`main.py`](main.py): Main coordination event loop and execution entry point.
-* **Documentation Guides:**
-  * [`PLAN.md`](PLAN.md): Project roadmaps and granular atomic task lists.
-  * [`CONSTRAINTS.md`](CONSTRAINTS.md): Financial cost equations and regulatory compliance parameters.
-  * [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md): Database stream schemas and multimodal forward-window joins.
-  * [`BACKTEST_METHODOLOGY.md`](BACKTEST_METHODOLOGY.md): Event-driven simulator parameters and backtest regimes.
 * **Data Ingestion & Processing (`data_pipeline/`):**
   * [`data_pipeline/database/db_client.py`](data_pipeline/database/db_client.py): Local SQLite3 initialization and synchronization queries.
   * [`data_pipeline/scrapers/news_scraper.py`](data_pipeline/scrapers/news_scraper.py): Asynchronous web scraper polling alternative news RSS feeds.
