@@ -1,0 +1,28 @@
+# ASIM-Tracker Internal Design & Spec Files
+PLAN.md
+CONSTRAINTS.md
+DATA_ARCHITECTURE.md
+BACKTEST_METHODOLOGY.md
+
+# Local Analytical SQLite Database
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Quantized ONNX weights & model artifacts
+*.onnx
+model_engine/finbert.onnx
+model_engine/tokenizer/
+
+# Python caching & bytecode compilation
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment & Private Variables
+.env
+.env.*
+
+# OS files
+.DS_Store
